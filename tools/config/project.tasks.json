@@ -1,0 +1,14 @@
+{
+  "test": [
+    "tslint",
+    "build.test",
+    "karma.run"
+  ],
+  
+  "serve": [
+    "build.dev",
+    "watch.dev",
+    "server.all.start"
+  ]
+}
+
