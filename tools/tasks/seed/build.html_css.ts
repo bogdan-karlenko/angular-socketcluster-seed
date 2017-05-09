@@ -93,7 +93,7 @@ function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:
 }
 
 /**
- * Processes the CSS files within `client` excluding those in `client/assets` using `postcss` with the
+ * Processes the CSS files within `client` excluding those in `src/client/assets` using `postcss` with the
  * configured processors.
  */
 function processComponentCss() {
@@ -115,7 +115,7 @@ function processExternalStylesheets() {
 }
 
 /**
- * Process scss stylesheets located in `client/css` and any css dependencies specified in
+ * Process scss stylesheets located in `src/client/css` and any css dependencies specified in
  * the global project configuration.
  */
 function processAllExternalStylesheets() {

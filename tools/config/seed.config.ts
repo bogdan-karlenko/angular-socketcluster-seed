@@ -156,7 +156,7 @@ export class SeedConfig {
    * The base folder of the applications source files.
    * @type {string}
    */
-  APP_SRC = `${this.APP_CLIENT}`;
+  APP_SRC = `src/${this.APP_CLIENT}`;
 
   /**
    * The name of the TypeScript project file

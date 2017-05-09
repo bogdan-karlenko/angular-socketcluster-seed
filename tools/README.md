@@ -36,8 +36,8 @@ The seed provides the following tasks:
 
 | Filename               | Description |
 | :--------------------- | :---------- |
-| `build.assets.dev.ts`  | Copies the assets (located in `client/assets`) over to the `public/dev/assets` directory |
-| `build.assets.prod.ts` | Copies the assets (located in `client/assets`) over to the `public/prod/assets` directory |
+| `build.assets.dev.ts`  | Copies the assets (located in `src/client/assets`) over to the `public/dev/assets` directory |
+| `build.assets.prod.ts` | Copies the assets (located in `src/client/assets`) over to the `public/prod/assets` directory |
 | `build.bundles.app.ts` | Bundles the JavaScript files using the SystemJS Builder |
 | `build.bundles.ts`     | Bundles the JavaScript shim dependencies |
 | `build.docs.ts`        | Builds the documentation for the TypeScript files using `typedoc` |

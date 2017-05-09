@@ -19,7 +19,7 @@ export = () => {
     .map((f: string) => '!' + join(Config.TMP_DIR, f, Config.NG_FACTORY_FILE + '.ts'));
 
   let src = [
-    Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
+    join(process.cwd(), Config.TOOLS_DIR, 'manual_typings/**/*.d.ts'),
     join(Config.TMP_DIR, '**/*.ts'),
     join(Config.TMP_DIR, `${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`),
     ...toIgnore

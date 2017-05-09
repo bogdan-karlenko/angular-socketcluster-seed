@@ -6,22 +6,6 @@ import * as http from 'http';
 import { log } from '../tools/utils';
 import { startServer } from './utils';
 
-function report(server: any, template: any) {
-    return Promise.resolve(server)
-        .then((instance: any) => {
-            const ref = instance.address(), address = ref.address, port = ref.port;
-            return console.log('[' + util.colors.blue(Config.STUB_API_LOG_PREFIX) + '] '
-                                   + util.colors.bold(template(`http://${address}:${port}/`)));
-        });
-}
-
-function watch(server: any) {
-    let promise: any = new Promise(function (resolve: any, reject: any) {
-        return resolve(server);
-    });
-    return promise;
-}
-
 exports.serve = function(options: any) {
     const server = options.server = http.createServer();
     const app = express();
@@ -56,3 +40,19 @@ exports.serve = function(options: any) {
             return server;
         });
 };
+
+function report(server: any, template: any) {
+    return Promise.resolve(server)
+        .then((instance: any) => {
+            const ref = instance.address(), address = ref.address, port = ref.port;
+            return console.log('[' + util.colors.blue(Config.STUB_API_LOG_PREFIX) + '] '
+                                   + util.colors.bold(template(`http://${address}:${port}/`)));
+        });
+}
+
+function watch(server: any) {
+    let promise: any = new Promise(function (resolve: any, reject: any) {
+        return resolve(server);
+    });
+    return promise;
+}

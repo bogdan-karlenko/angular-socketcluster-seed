@@ -14,7 +14,7 @@ const plugins = <any>gulpLoadPlugins();
 export = () => {
   let tsProject = makeTsProject({ 'target': 'es2015' }, Config.E2E_SRC);
   let src = [
-    Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
+    join(process.cwd(), Config.TOOLS_DIR, 'manual_typings/**/*.d.ts'),
     join(Config.E2E_SRC, '**/*.ts')
   ];
   let result = gulp.src(src)

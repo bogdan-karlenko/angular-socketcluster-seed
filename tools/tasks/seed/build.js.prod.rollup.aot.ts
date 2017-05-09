@@ -18,7 +18,7 @@ export = () => {
     moduleResolution: 'node'
   }, Config.TMP_DIR);
   const src = [
-    join(Config.TOOLS_DIR, '/manual_typings/**/*.d.ts'),
+    join(process.cwd(), Config.TOOLS_DIR, 'manual_typings/**/*.d.ts'),
     join(Config.TMP_DIR, '**/*.ts')
   ];
   const result = gulp.src(src)

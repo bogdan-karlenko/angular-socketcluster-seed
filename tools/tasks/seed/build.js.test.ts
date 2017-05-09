@@ -21,7 +21,7 @@ export =
     run() {
       let tsProject: any;
       let typings = gulp.src( [
-        Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
+        join(process.cwd(), Config.TOOLS_DIR, 'manual_typings/**/*.d.ts')
       ] );
       let src = [
         join(Config.APP_SRC, '**/*.spec.ts')

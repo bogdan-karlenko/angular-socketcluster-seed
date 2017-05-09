@@ -5,7 +5,7 @@ let SocketCluster = require('socketcluster').SocketCluster;
 let scHotReboot = require('sc-hot-reboot');
 let cntCpus = require('os').cpus().length;
 let env = require('node-env-file');
-env(join(process.cwd(), 'server/config', '.env_socketcluster');
+env(join(process.cwd(), 'server/config', '.env_socketcluster'));
 
 let workerControllerPath = argv.wc || process.env.SOCKETCLUSTER_WORKER_CONTROLLER;
 let brokerControllerPath = argv.bc || process.env.SOCKETCLUSTER_BROKER_CONTROLLER;
