@@ -10,7 +10,7 @@ import Config from '../../config';
 /**
  * read ports.json config
  */
-let ports = require(path.join(process.cwd(), 'src/server/config/server-port.json'));
+let ports = require(path.join(process.cwd(), 'server/config/server-port.json'));
 
 /**
  * Serves the Single Page Application.
@@ -23,13 +23,13 @@ export function serveAll(cb: Function, apiTarget: string = 'stubs') {
     process.on('SIGINT', (_: any) => process.exit(1));
     process.on('SIGTERM', (_: any) => process.exit(1));
 
-    const server = require(path.join(process.cwd(), 'src/server/server'));
+    const server = require(path.join(process.cwd(), 'server/server'));
 
     const livereloader = require('tiny-lr')();
     codeChangeTool.setLiveReloader(livereloader);
-    const reload = require(path.join(process.cwd(), 'src/server/reload')).serve({ port: ports.livereload, tinylr: livereloader });
-    const api = require(path.join(process.cwd(), 'src/server/api')).serve({ port: ports.api });
-    const stub = require(path.join(process.cwd(), 'src/server/stub')).serve({ port: ports.stub });
+    const reload = require(path.join(process.cwd(), 'server/reload')).serve({ port: ports.livereload, tinylr: livereloader });
+    const api = require(path.join(process.cwd(), 'server/api')).serve({ port: ports.api });
+    const stub = require(path.join(process.cwd(), 'server/stub')).serve({ port: ports.stub });
 
     server.serve({ port: ports.web, livereloadPort: ports.livereload, reload, api, stub })
         .then((instance: any) => {

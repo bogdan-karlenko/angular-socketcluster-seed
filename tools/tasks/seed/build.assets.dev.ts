@@ -5,8 +5,8 @@ import { AssetsTask } from '../assets_task';
 import Config from '../../config';
 
 /**
- * Executes the build process, copying the assets located in `src/client` over to the appropriate
- * `dist/dev` directory.
+ * Executes the build process, copying the assets located in `client` over to the appropriate
+ * `public/dev` directory.
  */
 export =
   class BuildAssetsTask extends AssetsTask {

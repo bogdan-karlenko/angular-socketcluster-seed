@@ -1,9 +1,9 @@
 import * as express from 'express';
 import * as util from 'gulp-util';
 import { resolve } from 'path';
-import Config from '../../tools/config';
+import Config from '../tools/config';
 import * as http from 'http';
-import { log } from '../../tools/utils';
+import { log } from '../tools/utils';
 import { startServer } from './utils';
 
 function report(server: any, template: any) {

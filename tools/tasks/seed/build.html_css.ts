@@ -39,7 +39,7 @@ const entrySCSSFiles    = join(Config.CSS_SRC, '**', '*.scss');
 const abtractSCSSFiles  = join(Config.SCSS_SRC, '**', '*.scss');
 
 /**
- * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
+ * Copies all HTML files in `client` over to the `dist/tmp` directory.
  */
 function prepareTemplates() {
   return gulp.src([
@@ -93,7 +93,7 @@ function getSCSSFiles(cacheName:string, filesToCompile:string[], filesToExclude:
 }
 
 /**
- * Processes the CSS files within `src/client` excluding those in `src/client/assets` using `postcss` with the
+ * Processes the CSS files within `client` excluding those in `client/assets` using `postcss` with the
  * configured processors.
  */
 function processComponentCss() {
@@ -115,7 +115,7 @@ function processExternalStylesheets() {
 }
 
 /**
- * Process scss stylesheets located in `src/client/css` and any css dependencies specified in
+ * Process scss stylesheets located in `client/css` and any css dependencies specified in
  * the global project configuration.
  */
 function processAllExternalStylesheets() {
@@ -151,7 +151,7 @@ function getExternalScssStream() {
 
 /**
  * Get an array of filenames referring to external scss stylesheets located in the global DEPENDENCIES
- * as well as in `src/css`.
+ * as well as in `css`.
  */
 function getExternalScss() {
   return Config.DEPENDENCIES.filter(dep => /\.scss$/.test(dep.src)).map(dep => dep.src)

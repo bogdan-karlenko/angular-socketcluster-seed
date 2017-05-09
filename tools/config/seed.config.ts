@@ -156,7 +156,7 @@ export class SeedConfig {
    * The base folder of the applications source files.
    * @type {string}
    */
-  APP_SRC = `src/${this.APP_CLIENT}`;
+  APP_SRC = `${this.APP_CLIENT}`;
 
   /**
    * The name of the TypeScript project file
@@ -179,7 +179,7 @@ export class SeedConfig {
   /**
    * The folder of the e2e specs and framework
    */
-  E2E_SRC = 'src/e2e';
+  E2E_SRC = 'test/e2e';
 
   /**
    * The folder of the applications scss files.
@@ -220,7 +220,7 @@ export class SeedConfig {
    * The base folder for built files.
    * @type {string}
    */
-  DIST_DIR = 'dist';
+  DIST_DIR = 'public';
 
   /**
    * The folder for built files in the `dev` environment.
@@ -401,7 +401,7 @@ export class SeedConfig {
 
       'app/*': '/app/*',
       // For test config
-      'dist/dev/*': '/base/dist/dev/*',
+      'public/dev/*': '/base/public/dev/*',
       '*': 'node_modules/*'
     },
     packages: {
@@ -432,7 +432,7 @@ export class SeedConfig {
     paths: {
       // Note that for multiple apps this configuration need to be updated
       // You will have to include entries for each individual application in
-      // `src/client`.
+      // `client`.
       [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
       '@angular/platform-browser/animations': 'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/animations/browser': 'node_modules/@angular/animations/bundles/animations-browser.umd.js',

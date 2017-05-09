@@ -2,9 +2,9 @@ import * as path from 'path';
 import * as url from 'url';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
-import Config from '../../../tools/config';
+import Config from '../../tools/config';
 
-let staticUrls = require(path.join(process.cwd(), 'src/server/config/static-uri.json'));
+let staticUrls = require(path.join(process.cwd(), 'server/config/static-uri.json'));
 
 module.exports = function (options: any) {
     if (!options) {
@@ -36,10 +36,10 @@ module.exports = function (options: any) {
             let fileName: any;
             if (isIndex) {
                 fileName = path.resolve(path.join(process.cwd(), Config.APP_DEST, 'index.html'));
-                // fileName = path.resolve(path.join(process.cwd(), 'dist/dev/', 'index.html'));
+                // fileName = path.resolve(path.join(process.cwd(), 'public/dev/', 'index.html'));
             } else {
                 fileName = path.resolve(path.join(process.cwd(), Config.APP_DEST, pathname));
-                // fileName = path.resolve(path.join(process.cwd(), 'dist/dev/', pathname));
+                // fileName = path.resolve(path.join(process.cwd(), 'public/dev/', pathname));
             }
             // console.log('-- filename', fileName);
 

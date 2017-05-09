@@ -27,7 +27,7 @@ services:
       - '5555:80'
     volumes:
       - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
-      - ./dist/prod:/var/www/dist/prod
+      - ./public/prod:/var/www/public/prod
 
 networks:
   prod-network:

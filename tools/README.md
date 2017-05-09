@@ -36,8 +36,8 @@ The seed provides the following tasks:
 
 | Filename               | Description |
 | :--------------------- | :---------- |
-| `build.assets.dev.ts`  | Copies the assets (located in `src/client/assets`) over to the `dist/dev/assets` directory |
-| `build.assets.prod.ts` | Copies the assets (located in `src/client/assets`) over to the `dist/prod/assets` directory |
+| `build.assets.dev.ts`  | Copies the assets (located in `client/assets`) over to the `public/dev/assets` directory |
+| `build.assets.prod.ts` | Copies the assets (located in `client/assets`) over to the `public/prod/assets` directory |
 | `build.bundles.app.ts` | Bundles the JavaScript files using the SystemJS Builder |
 | `build.bundles.ts`     | Bundles the JavaScript shim dependencies |
 | `build.docs.ts`        | Builds the documentation for the TypeScript files using `typedoc` |
@@ -53,8 +53,8 @@ The seed provides the following tasks:
 | `check.tools.ts`       | Checks if the build.tools task has been run, if so runs clean.tools then build.tools |
 | `clean.all.ts`         | Cleans all files within the `/dist` directory |
 | `clean.coverage.ts`    | Cleans all files within the `/coverage` directory |
-| `clean.dev.ts`         | Cleans all files within the `/dist/dev` directory |
-| `clean.prod.ts`        | Cleans all files within the `/dist/prod` directory |
+| `clean.dev.ts`         | Cleans all files within the `/public/dev` directory |
+| `clean.prod.ts`        | Cleans all files within the `/public/prod` directory |
 | `clean.tools.ts`       | Cleans all JavaScript files which were transpiled by the build.tools task  |
 | `copy.js.prod.ts`      | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
 | `css-lint.ts`          | Lints all `css` files using `stylelint` |
@@ -63,10 +63,10 @@ The seed provides the following tasks:
 | `karma.start.ts`       | Starts the unit tests using `karma` |
 | `serve.coverage.ts`    | Serves the unit test coverage report using an `express` server |
 | `serve.docs.ts`        | Serves the application documentation using an `express` server |
-| `server.prod.ts`       | Serves the files from `/dist/prod` using an `express` server |
-| `server.start.ts`      | Serves the files from `/dist/dev` using an `express` server |
+| `server.prod.ts`       | Serves the files from `/public/prod` using an `express` server |
+| `server.start.ts`      | Serves the files from `/public/dev` using an `express` server |
 | `tslint.ts`            | Lints the TypeScript files using `codelyzer` |
-| `watch.dev.ts`         | Watches for code changes and rebuilds the files in `/dist/dev` |
+| `watch.dev.ts`         | Watches for code changes and rebuilds the files in `/public/dev` |
 | `watch.e2e.ts`         | Watches for code changes and rebuilds the files in `/dist/e2e` |
 | `watch.test.ts`        | Watches for code changes and rebuilds the files in `/dist/test` |
 | `webdriver.ts`         | Installs the Selenium webdriver used for the Protractor e2e specs |

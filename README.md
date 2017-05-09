@@ -19,9 +19,9 @@ We can test/develop web application with local stub json file or api proxy serve
 
 ## Config
 
-- set port of servers :  ```src/server/config/server-port.json```
-- set address of api server : ```src/server/config/api-address.json```
-- set static path and index.html : ```src/server/config/static-uri.json```
+- set port of servers :  ```server/config/server-port.json```
+- set address of api server : ```server/config/api-address.json```
+- set static path and index.html : ```server/config/static-uri.json```
 
 ## Codes
 
@@ -98,7 +98,7 @@ $ npm run start.deving
 
 # dev build
 $ npm run build.dev
-# prod build, will output the production application in `dist/prod`
+# prod build, will output the production application in `public/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod
 
@@ -116,7 +116,7 @@ _Does not rely on any global dependencies._
 In order to start the seed with AoT use:
 
 ```bash
-# prod build with AoT compilation, will output the production application in `dist/prod`
+# prod build with AoT compilation, will output the production application in `public/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod.aot
 ```
@@ -128,7 +128,7 @@ This application provides full support for tree-shaking your production builds w
 To run this optimized production build, use:
 
 ```bash
-# prod build with AoT compilation and Rollup tree-shaking, will output the production application in `dist/prod`
+# prod build with AoT compilation and Rollup tree-shaking, will output the production application in `public/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod.rollup.aot
 ```
@@ -293,7 +293,7 @@ An [advanced option to this seed exists here](https://github.com/NathanWalker/an
   - Up to you and your team how you want to utilize it. It can be easily removed if not needed.
 - [angulartics2](https://github.com/angulartics/angulartics2) Vendor-agnostic analytics for Angular applications.
   - Out of box support for [Segment](https://segment.com/)
-    - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/index.html#L24)
+    - When using the seed, be sure to change your `write_key` [here](https://github.com/NathanWalker/angular-seed-advanced/blob/master/client/index.html#L24)
   - Can be changed to any vendor, [learn more here](https://github.com/angulartics/angulartics2#supported-providers)
 - [lodash](https://lodash.com/) Helps reduce blocks of code down to single lines and enhances readability
 - [NativeScript](https://www.nativescript.org/) cross platform mobile (w/ native UI) apps. [Setup instructions here](#nativescript-app).

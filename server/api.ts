@@ -3,13 +3,13 @@ import * as url from 'url';
 import * as path from 'path';
 import * as _ from 'underscore';
 import { startServer, readProxyAddress } from './utils';
-import { log } from '../../tools/utils';
+import { log } from '../tools/utils';
 
 const httpProxy = require('http-proxy');
 const debug = require('debug')('upstream:proxy');
 const forgeNotSupported = 'Proxying to forge is not supported. Please go to the forge on target environment directly';
 const proxyNotConfigured = (target: any) => {
-    return `API Server ${target} does not exist. Please make sure the proxy is configured in src/server/config/api-address.json`;
+    return `API Server ${target} does not exist. Please make sure the proxy is configured in server/config/api-address.json`;
 };
 const localUseIfDefined = function (proxy: any, remoteApiAddress: any, target: any) {
     let defaults = remoteApiAddress[target];
@@ -65,7 +65,7 @@ exports.serve = function(options: any) {
                 if (!err) {
                     return;
                 }
-                log('Please verify `src/server/config/api-address.json` is correct:');
+                log('Please verify `server/config/api-address.json` is correct:');
                 log(` - Duplicate entries of ${origin.proxy} may override correct setting.`);
                 return log(`WebSocket proxying error ${err}`);
             });

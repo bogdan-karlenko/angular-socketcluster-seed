@@ -1,17 +1,18 @@
-var fs = require('fs');
-var argv = require('minimist')(process.argv.slice(2));
-var SocketCluster = require('socketcluster').SocketCluster;
-var scHotReboot = require('sc-hot-reboot');
-var cntCpus = require('os').cpus().length;
-var env = require('node-env-file');
-env(__dirname + '/config/.env');
+import * as fs from 'fs';
+import { join } from 'path';
+let argv = require('minimist')(process.argv.slice(2));
+let SocketCluster = require('socketcluster').SocketCluster;
+let scHotReboot = require('sc-hot-reboot');
+let cntCpus = require('os').cpus().length;
+let env = require('node-env-file');
+env(join(process.cwd(), 'server/config', '.env_socketcluster');
 
-var workerControllerPath = argv.wc || process.env.SOCKETCLUSTER_WORKER_CONTROLLER;
-var brokerControllerPath = argv.bc || process.env.SOCKETCLUSTER_BROKER_CONTROLLER;
-var initControllerPath = argv.ic || process.env.SOCKETCLUSTER_INIT_CONTROLLER;
-var environment = process.env.ENV || 'dev';
+let workerControllerPath = argv.wc || process.env.SOCKETCLUSTER_WORKER_CONTROLLER;
+let brokerControllerPath = argv.bc || process.env.SOCKETCLUSTER_BROKER_CONTROLLER;
+let initControllerPath = argv.ic || process.env.SOCKETCLUSTER_INIT_CONTROLLER;
+let environment = process.env.ENV || 'dev';
 
-var options = {
+let options = {
   workers: Number(argv.w) || Number(process.env.SOCKETCLUSTER_WORKERS) || 1,
   brokers: Number(argv.b) || Number(process.env.SOCKETCLUSTER_BROKERS) || 1,
   port: Number(argv.p) || Number(process.env.SOCKETCLUSTER_PORT) || 8000,
@@ -34,25 +35,25 @@ var options = {
   environment: environment
 };
 
-var SOCKETCLUSTER_OPTIONS;
+let SOCKETCLUSTER_OPTIONS;
 
 if (process.env.SOCKETCLUSTER_OPTIONS) {
   SOCKETCLUSTER_OPTIONS = JSON.parse(process.env.SOCKETCLUSTER_OPTIONS);
 }
 
-for (var i in SOCKETCLUSTER_OPTIONS) {
+for (let i in SOCKETCLUSTER_OPTIONS) {
   if (SOCKETCLUSTER_OPTIONS.hasOwnProperty(i)) {
     options[i] = SOCKETCLUSTER_OPTIONS[i];
   }
 }
 
-var masterControllerPath = argv.mc || process.env.SOCKETCLUSTER_MASTER_CONTROLLER;
+let masterControllerPath = argv.mc || process.env.SOCKETCLUSTER_MASTER_CONTROLLER;
 
-var start = function () {
-  var socketCluster = new SocketCluster(options);
+let start = function () {
+  let socketCluster = new SocketCluster(options);
 
   if (masterControllerPath) {
-    var masterController = require(masterControllerPath);
+    let masterController = require(masterControllerPath);
     masterController.run(socketCluster);
   }
 
@@ -62,23 +63,23 @@ var start = function () {
     // See https://github.com/paulmillr/chokidar#api for details.
     console.log(`   !! The sc-hot-reboot plugin is watching for code changes in the ${__dirname} directory`);
     scHotReboot.attach(socketCluster, {
-      cwd: __dirname,
+      cwd: process.cwd(),
       ignored: ['public', 'node_modules', 'README.md', 'Dockerfile', 'server.js', 'broker.js', /[\/\\]\./, '*.log']
     });
   }
 };
 
-var bootCheckInterval = Number(process.env.SOCKETCLUSTER_BOOT_CHECK_INTERVAL) || 200;
+let bootCheckInterval = Number(process.env.SOCKETCLUSTER_BOOT_CHECK_INTERVAL) || 200;
 
 if (workerControllerPath) {
   // Detect when Docker volumes are ready.
-  var startWhenFileIsReady = (filePath) => {
+  let startWhenFileIsReady = (filePath) => {
     return new Promise((resolve) => {
       if (!filePath) {
         resolve();
         return;
       }
-      var checkIsReady = () => {
+      let checkIsReady = () => {
         fs.exists(filePath, (exists) => {
           if (exists) {
             resolve();
@@ -90,7 +91,7 @@ if (workerControllerPath) {
       checkIsReady();
     });
   };
-  var filesReadyPromises = [
+  let filesReadyPromises = [
     startWhenFileIsReady(masterControllerPath),
     startWhenFileIsReady(workerControllerPath),
     startWhenFileIsReady(brokerControllerPath),

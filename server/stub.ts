@@ -3,8 +3,8 @@ import * as express from 'express';
 import * as glob from 'glob';
 import * as path from 'path';
 import { startServer } from './utils';
-import Config from '../../tools/config';
-import { log } from '../../tools/utils';
+import Config from '../tools/config';
+import { log } from '../tools/utils';
 
 const body = require('body-parser');
 const debug = require('debug')('upstream:stub');

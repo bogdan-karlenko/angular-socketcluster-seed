@@ -56,7 +56,7 @@ export function serveCoverage() {
 }
 
 /**
- * Starts a new `express` server, serving the built files from `dist/prod`.
+ * Starts a new `express` server, serving the built files from `public/prod`.
  */
 export function serveProd() {
   let root = resolve(process.cwd(), Config.PROD_DEST);
