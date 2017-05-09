@@ -40,6 +40,7 @@ ts-node
 *.iml
 
 dist
+public
 dev
 tmp
 
