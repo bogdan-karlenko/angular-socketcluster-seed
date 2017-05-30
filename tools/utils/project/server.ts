@@ -15,28 +15,30 @@ let ports = require(path.join(process.cwd(), 'server/config/server-port.json'));
 /**
  * Serves the Single Page Application.
  */
-export function serveAll(cb: Function, apiTarget: string = 'stubs') {
+export function serveAll(apiTarget: string) {
 
-    const params = `proxy=${apiTarget}`;
+    return function () {
+        const params = `proxy=${apiTarget}`;
 
-    process.on('exit', (_: any) => changeFileManager.clear());
-    process.on('SIGINT', (_: any) => process.exit(1));
-    process.on('SIGTERM', (_: any) => process.exit(1));
+        process.on('exit', (_: any) => changeFileManager.clear());
+        process.on('SIGINT', (_: any) => process.exit(1));
+        process.on('SIGTERM', (_: any) => process.exit(1));
 
-    const server = require(path.join(process.cwd(), 'server/server'));
+        const server = require(path.join(process.cwd(), 'server/server'));
 
-    const livereloader = require('tiny-lr')();
-    codeChangeTool.setLiveReloader(livereloader);
-    const reload = require(path.join(process.cwd(), 'server/reload')).serve({ port: ports.livereload, tinylr: livereloader });
-    const api = require(path.join(process.cwd(), 'server/api')).serve({ port: ports.api });
-    const stub = require(path.join(process.cwd(), 'server/stub')).serve({ port: ports.stub });
+        const livereloader = require('tiny-lr')();
+        codeChangeTool.setLiveReloader(livereloader);
+        const reload = require(path.join(process.cwd(), 'server/reload')).serve({ port: ports.livereload, tinylr: livereloader });
+        const api = require(path.join(process.cwd(), 'server/api')).serve({ port: ports.api });
+        const stub = require(path.join(process.cwd(), 'server/stub')).serve({ port: ports.stub });
 
-    server.serve({ port: ports.web, livereloadPort: ports.livereload, reload, api, stub })
-        .then((instance: any) => {
-            const { port, address } = instance.address();
-            open(`http://${address}:${port}/?${params}`);
-        })
-        .catch((e: any) => console.error('server exception', e));
+        server.serve({ port: ports.web, livereloadPort: ports.livereload, reload, api, stub })
+            .then((instance: any) => {
+                const { port, address } = instance.address();
+                open(`http://${address}:${port}/?${params}`);
+            })
+            .catch((e: any) => console.error('server exception', e));
+    }
 }
 
 /**

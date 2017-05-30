@@ -19,9 +19,11 @@ We can test/develop web application with local stub json file or api proxy serve
 
 ## Config
 
-- set port of servers :  ```server/config/server-port.json```
-- set address of api server : ```server/config/api-address.json```
-- set static path and index.html : ```server/config/static-uri.json```
+- set port of servers :  ```tools/config/stub_api/server-port.json```
+- set address of api server : ```tools/config/stub_api/api-address.json```
+- set index.html by url when refresh : ```tools/config/stub_api/index-uri.json```
+- set static path and index.html : ```tools/config/stub_api/static-uri.json```
+- set restful service path : ```tools/config/stub_api/service-uri.json```
 
 ## Codes
 

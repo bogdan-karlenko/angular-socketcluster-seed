@@ -2,9 +2,13 @@ import * as path from 'path';
 import * as url from 'url';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
+import * as util from 'gulp-util';
+
 import Config from '../../tools/config';
 
-let staticUrls = require(path.join(process.cwd(), 'server/config/static-uri.json'));
+let staticUrls = require(path.join(process.cwd(), 'server/config/stub_api/static-uri.json'));
+let serviceUrls = require(path.join(process.cwd(), 'server/config/stub_api/service-uri.json'));
+let indexUrls = require(path.join(process.cwd(), 'server/config/stub_api/index-uri.json'));
 
 module.exports = function (options: any) {
     if (!options) {
@@ -17,29 +21,70 @@ module.exports = function (options: any) {
     return function (req: any, res: any, next: any) {
         const pathname = url.parse(req.url).pathname;
         let isStatic: boolean = false;
+        let isService: boolean = false;
         let isIndex: boolean = false;
-        if (pathname === '/') {
-            isStatic = true;
-            isIndex = true;
-        } else {
-            staticUrls.forEach((url: any) => {
-                if (isStatic) { return; }
-                isStatic = pathname.indexOf(url.path) === 0;
-                if (isStatic) {
-                    isIndex = url.index;
-                    return;
+        const paths = pathname.split('/');
+        let pathFirst: any = '';
+        if (paths.length === 1) {
+            pathFirst = '/';
+        } else if (paths.length > 1) {
+            pathFirst = '/' + paths[1];
+        }
+
+        /**
+         * If it is reload, set index.html because it is SPA.
+         * index.html을 불러올지 1차 판단
+         */
+        indexUrls.forEach((url: any) => {
+            if (isIndex) { return; }
+
+            isIndex = pathFirst === url.path;
+            if (isIndex) {
+                isStatic = true;
+                // util.log('>>>> index', pathname);
+                return;
+            }
+        });
+
+        /**
+         * service Restful 이면 proxy로 가고, static이면 static server에서 수행 
+         */
+        if (!isIndex) {
+            if (pathname) {
+                // For Restful service call
+                serviceUrls.forEach((url: any) => {
+                    if (isService) { return; }
+
+                    isService = pathname.indexOf(url.path) === 0;
+                    if (isService) {
+                        isStatic = false;
+                        return;
+                    }
+                });
+
+                if (!isService) {
+                    staticUrls.forEach((url: any) => {
+                        if (isStatic) { return; }
+
+                        isStatic = pathname.indexOf(url.path) === 0;
+                        if (isStatic) {
+                            isIndex = url.index;
+                            return;
+                        }
+                    });
                 }
-            });
+
+            }
         }
 
         if (isStatic) {
             let fileName: any;
             if (isIndex) {
                 fileName = path.resolve(path.join(process.cwd(), Config.APP_DEST, 'index.html'));
-                // fileName = path.resolve(path.join(process.cwd(), 'public/dev/', 'index.html'));
+                // fileName = path.resolve(path.join(process.cwd(), 'dist/dev/', 'index.html'));
             } else {
                 fileName = path.resolve(path.join(process.cwd(), Config.APP_DEST, pathname));
-                // fileName = path.resolve(path.join(process.cwd(), 'public/dev/', pathname));
+                // fileName = path.resolve(path.join(process.cwd(), 'dist/dev/', pathname));
             }
             // console.log('-- filename', fileName);
 
@@ -59,6 +104,7 @@ module.exports = function (options: any) {
                 }
             });
         } else if (pathname !== '/' || pathname === req.url) {
+            // util.log('> call url', req.url);
             return next();
         }
     };

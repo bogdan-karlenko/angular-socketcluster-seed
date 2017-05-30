@@ -1,6 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
+import { argv } from 'yargs';
 // import { ExtendPackages } from './seed.config.interfaces';
 
 /**
@@ -11,7 +12,9 @@ export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
-  STUB_API_LOG_PREFIX = 'JM';
+  STUB_API_LOG_PREFIX = 'SC';
+
+  PROXY_NAME: string;
 
   /**
    * production bundle file for debuggin
@@ -41,7 +44,10 @@ export class ProjectConfig extends SeedConfig {
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
 
-    this.APP_TITLE = 'Stub API Development Environment';
+    this.APP_TITLE = 'SocketCluster Development Environment';
+
+    // default PROXY server name
+    this.PROXY_NAME = argv['proxy'] || 'stubs';
 
     this.JS_PROD_APP_DEBUG_BUNDLE = 'app-debug.js';
     this.JS_PROD_APP_DEFINITION_BUNDLE = 'app-debug.d.ts';
